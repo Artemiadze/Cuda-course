@@ -75,75 +75,72 @@
             - https://pytorch.org/TensorRT/getting_started/installation.html#installation
         - 
 - Triton
-    - Developed and maintained by OpenAI ⇒ https://openai.com/index/triton/
-    - ‣
-    - CUDA-like, but in python and gets rid of clutter around kernel development in regular CUDA C/C++. Also matches record performance on Matrix Multiplication
+    - Разработан и поддерживается компанией OpenAI ⇒ https://openai.com/index/triton/
+    - CUDA-like, но на python и избавляет от путаницы при разработке ядра на обычном CUDA C/C++. Также соответствует рекордной производительности при умножении матриц
     - Get started ⇒ https://triton-lang.org/main/index.html
-    - Write your first Triton kernel ⇒ https://triton-lang.org/main/getting-started/tutorials/index.html
+    - Напиши свой первое Triton-ядро ⇒ https://triton-lang.org/main/getting-started/tutorials/index.html
     - Triton Inference Server
         - https://developer.nvidia.com/triton-inference-server
-        - ‣
-        - 
     - https://www.eecs.harvard.edu/~htk/publication/2019-mapl-tillet-kung-cox.pdf is the original Triton paper
-    - triton-viz is Triton’s main profiling and visualization toolkit
-    - Python to finely control what happens on the GPU without worrying about the unexpected intricacies and complexities in C/C++.
-        - Removes explicit memory management `cudaMalloc`, `cudaMemcpy`, `cudaFree`
-        - No need for error checking / macros `CUDA_CHECK_ERROR`
-        - Reduced complexity when grid / block / thread level indexing on kernel launch parameters
+    - triton-viz - это основной инструментарий Triton для профилирования и визуализации
+    - Python позволяет точно контролировать то, что происходит на графическом процессоре, не беспокоясь о неожиданных хитросплетениях и сложностях C/C++.
+        - Устраняет явное управление памятью `cudaMalloc`, `cudaMemcpy`, `cudaFree`
+        - Нет необходимости в проверке ошибок / макросах `CUDA_CHECK_ERROR`
+        - Уменьшена сложность при индексации на уровне сетки / блока / потока в параметрах запуска ядра
     
 ![](../05%20Writing%20your%20First%20Kernels/assets/triton1.png)
     
 - torch.compile
-    - Gets more attention than TorchScript and is typically better performance
-    - Compiles a model down to a static representation so the dynamic graph component of pytorch doesn’t have to worry about things changing. Runs the model as an optimized binary instead of default out-of-the-box pytorch
+    - Требует больше внимания чем TorchScript и, как правило, это более высокопроизводительней
+    - Компилирует модель до статического представления, чтобы динамический графический компонент pytorch не беспокоился о том, что что-то изменится. Запускает модель как оптимизированный двоичный файл вместо стандартного готового pytorch
     - https://discuss.pytorch.org/t/the-difference-between-torch-jit-script-and-torch-compile/188167
 - TorchScript
-    - Can be faster in scenarios, especially when deployed in C++
-    - Performance gains can be specific to your neural net architecture
+    - Может быть быстрым в сценариях, специально когда разворачивается на C++
+    - Повышение производительности может зависеть от вашей архитектуры нейронной сети
     - https://discuss.pytorch.org/t/the-difference-between-torch-jit-script-and-torch-compile/188167
 - ONNX Runtime
     - https://youtu.be/M4o4YRVba4o
-    - “**ONNX Runtime training** can accelerate the model training time on multi-node NVIDIA GPUs for transformer models with a one-line addition for existing PyTorch training scripts”
-    - Developed and maintained by Microsoft
+    - “**ONNX Runtime training** можно ускорить время обучения модели на многоузловых графических процессорах NVIDIA для моделей transformer с помощью однострочного добавления к существующим сценариям обучения PyTorch”
+    - Разработан и поддерживается компанией Microsoft
 - Detectron2
-    - Supports training and inference
-    - Computer vision project started at Facebook (Meta)
-    - Detection and segmentation algorithms
+    - Поддерживает обучения и тестирование модели
+    - Проект по компьютерному зрению под началом Facebook (Meta)
+    - Алгоритмы обнаружения и сегментации
 
 ## Low-Level
 - CUDA
-    - Compute unified device architecture (CUDA) can be thought of as a programming language for nvidia gpus.
-    - CUDA libs ⇒ cuDNN, cuBLAS, cutlass (fast linear algebra and DL algorithms). cuFFT for fast convolutions (FFTs are covered in the course)
-    - writing the kernel yourself based on the hardware architecture (Nvidia still does this under the hood for by passing in special flags to the compiler)
+    - Compute unified device architecture (CUDA) можно рассматривать как язык программирования для графических процессоров nvidia.
+    - CUDA libs ⇒ cuDNN, cuBLAS, cutlass (быстрая линейная алгебра и DL алгоритмы). cuFFT для быстрого свёртки (FFTs рассматриваются в курсе)
+    - самостоятельная реализация ядер основана на аппаратная архитектура (Nvidia по-прежнему делает это скрытно, передавая специальные флаги компилятору)
 - ROCm
-    - CUDA equivalent for AMD GPUs
+    - CUDA эквивалентна AMD GPUs
 - OpenCL
-    - Open Computing Language
+    - Открытый вычислительный язык (Open Computing Language) 
     - CPUs, GPUs, digital signal processors, other hardware
-    - since NVIDIA designed CUDA, it will outperform OpenCL on Nvidia tasks. If you are doing work with embedded systems (EE/CE), this is still worth learning.
+    - с тех пор как NVIDIA спроектирована CUDA, он будет превосходить OpenCL в задачах Nvidia. Если вы работаете с встраиваемыми системы (EE/CE), этому все еще стоит научиться.
 
 ## Inference for Edge Computing & Embedded Systems
     
-- Edge Computing refers to low-latency and highly efficient local computing in the context of real-world distributed systems like fleets. Tesla FSD is a prime example of edge computing because it has a neural net running locally on the car. It also has to send data back to Tesla so they can improve their models. 
+- Периферийные вычисления относятся к локальным вычислениям с низкой задержкой и высокой эффективностью в реальных распределенных системах, таких как автопарки. Tesla FSD является ярким примером периферийных вычислений, поскольку в ней используется нейронная сеть, работающая локально в автомобиле. Он также должен отправлять данные обратно в Tesla, чтобы они могли улучшить свои модели.
 
 - CoreML
-    - Primarily for deployment of pre-trained models on Apple devices
-    - Optimized for on-device inference
-    - Supports on-device training
-    - Supports a wide range of model types (vision, natural language, speech, etc.)
-    - Integrates well with Apple's ecosystem (iOS, macOS, watchOS, tvOS)
-    - Focuses on privacy by keeping data on-device
-    - Allows model conversion from other frameworks
-    - Designed for app developers to easily incorporate ML into their apps
+- В первую очередь для развертывания предварительно обученных моделей на устройствах Apple
+    - Оптимизирован для вывода на устройстве
+    - Поддерживает обучение на устройстве
+    - Поддерживает широкий спектр типов моделей (зрение, естественный язык, речь и т.д.)
+    - Хорошо интегрируется с экосистемой Apple (iOS, macOS, watchOS, tvOS)
+    - Обеспечивает конфиденциальность данных, сохраняя их на устройстве
+    - Позволяет преобразовывать модели из других платформ
+    - Разработан для того, чтобы разработчики приложений могли легко внедрять ML в свои приложения
 - PyTorch Mobile
 - TensorFlow Lite
 
 ## Easy to Use
 - FastAI
-    - High-level API: Built on top of PyTorch, FastAI provides a more user-friendly interface for common deep learning tasks.
-    - Rapid prototyping: Designed for quick implementation of state-of-the-art deep learning models.
-    - Best practices: Incorporates many best practices and recent advances in deep learning by default.
-    - Less code: Typically requires less code to implement complex models compared to raw PyTorch.
+    - Высокоуровневый API: Созданный на основе передовых технологий, Festival предоставляет более удобный интерфейс для решения распространенных задач глубокого обучения.
+    - Быстрое прототипирование: Предназначен для быстрого внедрения современных моделей глубокого обучения.
+    - Лучшие практики: Включает в себя много отличных практик и последние достижения в сфере глубинного обучения.
+    - Менье кода: Typically requires less code to implement complex models compared to raw PyTorch.
     - Transfer learning: Excellent support for transfer learning out of the box.
 - ONNX
     - Open Neural Network eXchange
@@ -167,10 +164,10 @@
     ![Untitled](assets/onnx.png)
     
 - wandb
-    - Short for weights and biases
-    - Easy to integrate with projects w/ a few lines of code
-    - Team collaboration
-    - Compare experiments w/ an intuitive UI
+    - Сокращение от весов и погрешностей
+    - Простая интеграция с проектами с помощью нескольких строк кода
+    - Совместная работа в команде
+    - Сравнение экспериментов с интуитивно понятным пользовательским интерфейсом
     
     ![Untitled](assets/wandb.png)
         
@@ -183,27 +180,25 @@
     - Vertex AI
     - VM instances
 - Microsoft Azure
-    - Deep speed
+    - Высокая скорость
 - OpenAI
 - VastAI
-    - link picture of UI here
+    - ссылка на изображение пользовательского интерфейса здесь
 - Lambda Labs
-    - Cheap datacenter GPUs
+    - Дешевые графические процессоры для центров обработки данных
 ## Compilers
 - XLA
-    - A domain-specific compiler for linear algebra that optimizes TensorFlow computations
-    - Provides a lower-level optimization and code generation backend for JAX
-    - Performs whole-program optimization, seeing beyond individual operations to optimize across the entire computation graph
-    - Enables efficient execution on various hardware (CPUs, GPUs, TPUs) by generating optimized machine code
-    - Implements advanced optimizations like operation fusion, which combines multiple operations into a single, more efficient kernel
-    - Allows JAX to achieve high performance without manually writing hardware-specific code
+    - Специализированный компилятор для линейной алгебры, оптимизирующий вычисления с использованием тензорного потока
+    - Обеспечивает низкоуровневую оптимизацию и генерацию кода для JAX
+    - Выполняет оптимизацию всей программы, не ограничиваясь отдельными операциями, для оптимизации всего графика вычислений
+    - Обеспечивает эффективное выполнение на различных аппаратных средствах (центральных и графических процессорах) за счет создания оптимизированного машинного кода
+    - Реализованы расширенные возможности оптимизации, такие как operation fusion, которая объединяет множество операций в одном, более эффективном ядре
+    - Позволяет JAX достигать высокой производительности без ручного написания специфичного для оборудования кода
 - LLVM
 - MLIR
 - NVCC
-    - Nvidia CUDA Compiler
-    - Works on everything in the CUDA toolkit
-    
-    ![Untitled](../10%20Extras/assets/nvcc.png)
+    - Nvidia CUDA компилятор
+    - Работает со всем, что есть в наборе инструментов CUDA
         
 ## Misc
 - Huggingface
