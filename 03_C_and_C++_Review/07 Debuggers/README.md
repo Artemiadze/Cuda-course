@@ -1,24 +1,24 @@
 ## GDB Debugger for C/C++ (not covered in video lectures)
 
-> Install -> `sudo apt install gdb`
+> Установка -> `sudo apt install gdb`
 
-Watch: https://www.youtube.com/watch?v=Dq8l1_-QgAc
+Смотреть: https://www.youtube.com/watch?v=Dq8l1_-QgAc
 
 ### Commands
-- run or r: Executes the program from start to end.
-- break or b: Set a breakpoint on a particular line.
-- disable: Disables a breakpoint.
-- enable: Enables a disabled breakpoint.
+- run or r: Выполнить программу от начала до конца.
+- break or b: Установить точку останова (breakpoint) на фиксированной линии.
+- disable: Отключает точку останова (breakpoint)
+- enable: Включает отключенную точку останова.
 
-- next or n: Executes the next line of code in C.
-- nexti: Executes the next instruction in assembly.
-- step or s: Executes the next line of code, but if the next line of code is a function, it will enter the function and stop at the first line of the function.
-- stepi: Executes the next instruction in assembly, but if the next instruction is a function, it will enter the function and stop at the first instruction of the function.
+- next or n: Выполняет следующую линию в коде на Си.
+- nexti: Выполняет следующую инструкцию в ассемблере.
+- step or s: Выполняет следующую строку кода, но если следующая строка кода является функцией, то она войдет в функцию и остановится на первой строке функции.
+- stepi: Выполняет следующую команду в assembly, но если следующая команда является функцией, она войдет в функцию и остановится на первой команде функции.
 
-- list or l: Shows all the code within current scope.
-- print or p: Prints the value of a variable.
-- quit or q: Exits gdb.
-- clear: Removes all breakpoints.
-- continue or c: Continues the execution of the program until the next breakpoint.
+- list or l: Показывает весь код в пределах текущей области.
+- print or p: Выводит значение переменной.
+- quit or q: Выходит из gdb.
+- clear: Удаляет все breakpoint.
+- continue or c: Продолжает выполнение программы до следующей точки останова.
 
-> Its worth noting that gdb is used for debugging C/C++ programs, whereas cuda-gdb is used for debugging CUDA programs.
+> Стоит отметить, что gdb используется для отладки программ на C/C++, в то время как cuda-gdb используется для отладки программ на CUDA.

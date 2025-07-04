@@ -7,27 +7,26 @@ targets: prerequisites
 
 ### Purpose of CMakeLists.txt?
 
-CMake is a tool that **generates Makefiles**. It is a build system generator. It is used to build, test, and package software. It is a cross-platform build system. It is used to control the software compilation process using simple platform and compiler independent configuration files.
-
+CMake - это инструмент, который **генерирует Make-файлы**. Это генератор систем сборки. Он используется для создания, тестирования и упаковки программного обеспечения. Это кроссплатформенная система сборки. Он используется для управления процессом компиляции программного обеспечения с помощью простых конфигурационных файлов, не зависящих от платформы и компилятора.
 
 
 ### What does `.PHONY` do?
 
-Say we have a Makefile with a target named 'clean':
+Допустим, у нас есть Makefile с целью с именем 'clean':
 ```make
 clean:
     rm -rf build/*
 ```
 
-Suppose we have a directory named 'clean' in the same directory as the Makefile. If we run `make clean`, make will not run the command in the target 'clean'. Instead, it will see that the directory 'clean' already exists and will not run the command.
+Предположим, у нас есть каталог с именем "clean" в том же каталоге, что и Make-файл. Если мы запустим `make clean`, make не запустит команду в целевом `clean`. Вместо этого он увидит, что каталог "clean" уже существует, и не будет запускать команду.
 
-In short, we essentially make a bunch of mappings from target names to commands. If we have a file or directory with the same name as a target, make will not run the command. This is where `.PHONY` comes in.
+Короче говоря, мы, по сути, создаем множество сопоставлений имен целевых объектов с командами. Если у нас есть файл или каталог с тем же именем, что и у целевого объекта, make не будет запускать команду. Вот тут-то и появляется `.PHONY`.
 
 ### `:=` vs `=` in Makefiles
 
-`=` is used for defining variables. It is called a **recursive assignment**. The value of the variable is re-evaluated each time the variable is used.
+`=` используется для определения переменных. Это называется **recursive assignment**. Значение переменной переоценивается каждый раз, когда она используется.
 
-`:=` is used for defining variables. It is called a **simple assignment** or **immediate assignment**. The value of the variable is evaluated only once, at the point of definition.
+`:=` iиспользуется для определения переменных. Это называется **simple assignment** or **immediate assignment**. Значение переменной вычисляется только один раз, в момент определения.
 
 Example:
 ```make
@@ -43,7 +42,7 @@ all:
 
 ### What is the purpose of `@` in Makefiles?
 
-The @ symbol prevents the command itself from being echoed to the console when the Makefile is executed.
+Символ @ предотвращает вывод самой команды на консоль при выполнении Makefile.
 
 Example:
 ```make
