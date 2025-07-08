@@ -1,3 +1,6 @@
+/05_Writing_your_First_Kernels/03 Profiling
+/05_Writing_your_First_Kernels/04 Atomics
+/05_Writing_your_First_Kernels/05 Streams
 /06_CUDA_APIs/
 /07_Faster_Matmul/
 /08_Triton/
