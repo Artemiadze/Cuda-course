@@ -1,7 +1,7 @@
 /05_Writing_your_First_Kernels/05 Streams
 /06_CUDA_APIs/01 CUBLAS
 /06_CUDA_APIs/02 CUDNN
-/06_CUDA_APIs/03 Larger Rigs or Datacenter
+/06_CUDA_APIs/03 Larger Rigs or Datacenters
 /07_Faster_Matmul/
 /08_Triton/
 /09_PyTorch_Extensions/
